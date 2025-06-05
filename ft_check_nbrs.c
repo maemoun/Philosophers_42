@@ -6,11 +6,19 @@
 /*   By: maeskhai <maeskhai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 11:52:06 by maeskhai          #+#    #+#             */
-/*   Updated: 2025/06/05 13:02:54 by maeskhai         ###   ########.fr       */
+/*   Updated: 2025/06/05 20:31:00 by maeskhai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+int	ft_check(t_table *table)
+{
+	if (table->nb_philos == 0 || table->time_to_die == 0 
+		|| table->time_to_eat == 0 || table->time_to_sleep == 0)
+		return (-1);
+	return (1);
+}
 
 int	ft_check_nbrs(int ac, char **av, t_table *table)
 {
@@ -32,6 +40,8 @@ int	ft_check_nbrs(int ac, char **av, t_table *table)
 			if (ft_atoi(av[5]) != -1)
 				table->nb_of_meals = (ft_atoi(av[5]));
 		}
+		if (ft_check(table) == -1)
+			return (-1);
 		if (ft_atoi(av[i]) == -1)
 			return (-1);
 		i++;
