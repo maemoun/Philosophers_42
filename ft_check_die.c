@@ -6,27 +6,27 @@
 /*   By: maeskhai <maeskhai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 16:03:01 by maeskhai          #+#    #+#             */
-/*   Updated: 2025/05/28 19:37:51 by maeskhai         ###   ########.fr       */
+/*   Updated: 2025/06/05 13:15:14 by maeskhai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	ft_last_time(t_table *lst)
+int	ft_last_time(t_table *table)
 {
 	int			i;
 	long long	time;
 
 	i = 0;
-	while (i < lst->nb_philos)
+	while (i < table->nb_philos)
 	{
 		time = get_time_ms();
-		if (time - lst->philos[i].last_meal >= lst->time_to_die)
+		if (time - table->philos[i].last_meal >= table->time_to_die)
 		{
-			ft_print_status(&lst->philos[i], "is died");
-			pthread_mutex_lock(&lst->death_mutex);
-			lst->is_dead = 1;
-			pthread_mutex_unlock(&lst->death_mutex);
+			ft_print_status(&table->philos[i], "is died");
+			pthread_mutex_lock(&table->death_mutex);
+			table->is_dead = 1;
+			pthread_mutex_unlock(&table->death_mutex);
 			return (1);
 		}
 		i++;
@@ -34,26 +34,26 @@ int	ft_last_time(t_table *lst)
 	return (0);
 }
 
-int	ft_max_eat(t_table *lst)
+int	ft_max_eat(t_table *table)
 {
 	int	i;
 	int	full;
 
 	i = 0;
 	full = 0;
-	while (i < lst->nb_philos)
+	while (i < table->nb_philos)
 	{
-		pthread_mutex_lock(&lst->eat_mutex);
-		if (lst->philos[i].meal_count >= lst->nb_of_meals)
+		pthread_mutex_lock(&table->eat_mutex);
+		if (table->philos[i].meal_count >= table->nb_of_meals)
 			full++;
-		pthread_mutex_unlock(&lst->eat_mutex);
+		pthread_mutex_unlock(&table->eat_mutex);
 		i++;
 	}
-	if (full == lst->nb_philos)
+	if (full == table->nb_philos)
 	{
-		pthread_mutex_lock(&lst->death_mutex);
-		lst->is_dead = 1;
-		pthread_mutex_unlock(&lst->death_mutex);
+		pthread_mutex_lock(&table->death_mutex);
+		table->is_dead = 1;
+		pthread_mutex_unlock(&table->death_mutex);
 		return (1);
 	}
 	return (0);
@@ -61,12 +61,12 @@ int	ft_max_eat(t_table *lst)
 
 void	*ft_check_die(void	*arg)
 {
-	t_table	*lst;
+	t_table	*table;
 
-	lst = (t_table *)arg;
-	while (!lst->is_dead)
+	table = (t_table *)arg;
+	while (!table->is_dead)
 	{
-		if (ft_last_time(lst) || ft_max_eat(lst))
+		if (ft_last_time(table) || ft_max_eat(table))
 			break ;
 	}
 	return (NULL);

@@ -6,7 +6,7 @@
 /*   By: maeskhai <maeskhai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 11:51:56 by maeskhai          #+#    #+#             */
-/*   Updated: 2025/05/28 19:44:28 by maeskhai         ###   ########.fr       */
+/*   Updated: 2025/06/05 13:17:38 by maeskhai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,14 @@ typedef struct s_table
 
 void	ft_print_error(char *s);
 int		ft_atoi(char *s);
-int		ft_check_nbrs(int ac, char **av, t_table *lst);
-void	ft_forks_to_philos(t_table *lst);
-void	ft_creat_philos(t_table *lst);
+int		ft_check_nbrs(int ac, char **av, t_table *table);
+void	ft_forks_to_philos(t_table *table);
+void	ft_creat_philos(t_table *table);
 long	get_time_ms(void);
 void	*philo_routine(void *arg);
 void	ft_print_status(t_philo *philo, char *msg);
 void	*ft_check_die(void	*arg);
-void	ft_usleep(long microseconds, t_table *lst);
-void	ft_cleanup(t_table *lst);
+void	ft_usleep(long microseconds, t_table *table);
+void	ft_cleanup(t_table *table);
 
 #endif
