@@ -6,7 +6,7 @@
 /*   By: maeskhai <maeskhai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 11:51:56 by maeskhai          #+#    #+#             */
-/*   Updated: 2025/06/08 16:35:42 by maeskhai         ###   ########.fr       */
+/*   Updated: 2025/06/08 17:06:22 by maeskhai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,10 @@ void	*ft_check_die(void	*arg);
 void	ft_usleep(long microseconds, t_table *table);
 void	ft_cleanup(t_table *table);
 int		is_dead_check(t_table *table);
+void	ft_print_status(t_philo *philo, char *msg);
+void	philo_eat(t_philo *philo);
+int		is_dead(t_philo *philo);
+void	take_forks(t_philo *philo);
+void	ft_unlock_forks(t_philo *philo);
 
 #endif

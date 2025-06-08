@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_usleep.c                                        :+:      :+:    :+:   */
+/*   ft_print_status.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maeskhai <maeskhai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/25 18:08:52 by maeskhai          #+#    #+#             */
-/*   Updated: 2025/06/08 16:59:50 by maeskhai         ###   ########.fr       */
+/*   Created: 2025/06/08 16:57:18 by maeskhai          #+#    #+#             */
+/*   Updated: 2025/06/08 16:57:32 by maeskhai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ft_usleep(long microseconds, t_table *table)
+void	ft_print_status(t_philo *philo, char *msg)
 {
-	long	start;
-	int		dead;
+	long long	timestamp;
 
-	start = get_time_ms();
-	while (get_time_ms() - start <= microseconds)
+	pthread_mutex_lock(&philo->table->print_mutex);
+	pthread_mutex_lock(&philo->table->death_mutex);
+	if (!philo->table->is_dead)
 	{
-		pthread_mutex_lock(&table->death_mutex);
-		dead = table->is_dead;
-		pthread_mutex_unlock(&table->death_mutex);
-		if (dead == 1)
-			break ;
-		usleep(400);
+		timestamp = get_time_ms() - philo->table->start_time;
+		printf("%lld %d %s\n", timestamp, philo->index, msg);
 	}
-	return ;
+	pthread_mutex_unlock(&philo->table->death_mutex);
+	pthread_mutex_unlock(&philo->table->print_mutex);
 }

@@ -6,7 +6,7 @@
 /*   By: maeskhai <maeskhai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 16:03:01 by maeskhai          #+#    #+#             */
-/*   Updated: 2025/06/08 16:34:08 by maeskhai         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:52:31 by maeskhai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	ft_last_time(t_table *table)
 	while (i < table->nb_philos)
 	{
 		time = get_time_ms();
-
 		pthread_mutex_lock(&table->philos[i].meal_mutex);
 		last_meal = table->philos[i].last_meal;
 		pthread_mutex_unlock(&table->philos[i].meal_mutex);
@@ -74,7 +73,7 @@ void	*ft_check_die(void	*arg)
 		if (ft_last_time(table))
 			break ;
 		if (table->nb_of_meals > 0 && ft_max_eat(table))
-			break;
+			break ;
 		usleep(1000);
 	}
 	return (NULL);
