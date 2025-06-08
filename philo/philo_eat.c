@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_philo_eat.c                                     :+:      :+:    :+:   */
+/*   philo_eat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: maeskhai <maeskhai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 16:58:26 by maeskhai          #+#    #+#             */
-/*   Updated: 2025/06/08 17:02:45 by maeskhai         ###   ########.fr       */
+/*   Updated: 2025/06/08 20:33:45 by maeskhai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,11 @@ void	philo_eat(t_philo *philo)
 	}
 	ft_print_status(philo, "is eating");
 	pthread_mutex_lock(&philo->meal_mutex);
+	pthread_mutex_lock(&philo->last_mutex);
 	philo->last_meal = get_time_ms();
 	philo->meal_count++;
 	pthread_mutex_unlock(&philo->meal_mutex);
+	pthread_mutex_unlock(&philo->last_mutex);
 	ft_usleep(philo->table->time_to_eat, philo->table);
 	ft_unlock_forks(philo);
 }
