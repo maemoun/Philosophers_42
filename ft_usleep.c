@@ -6,7 +6,7 @@
 /*   By: maeskhai <maeskhai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 18:08:52 by maeskhai          #+#    #+#             */
-/*   Updated: 2025/06/05 17:27:13 by maeskhai         ###   ########.fr       */
+/*   Updated: 2025/06/08 15:37:32 by maeskhai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,11 @@ void	ft_usleep(long microseconds, t_table *table)
 	start = get_time_ms();
 	while (get_time_ms() - start <= microseconds)
 	{
-		if (table->is_dead == 1)
+		int dead;
+		pthread_mutex_lock(&table->death_mutex);
+		dead = table->is_dead;
+		pthread_mutex_unlock(&table->death_mutex);
+		if (dead == 1)
 			break ;
 		usleep(400);
 	}
