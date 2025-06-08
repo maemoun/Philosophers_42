@@ -6,7 +6,7 @@
 /*   By: maeskhai <maeskhai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 11:51:56 by maeskhai          #+#    #+#             */
-/*   Updated: 2025/06/08 15:23:09 by maeskhai         ###   ########.fr       */
+/*   Updated: 2025/06/08 15:46:10 by maeskhai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_philo
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
 	t_table			*table;
+	pthread_mutex_t	meal_mutex;
 	pthread_t		thread;
 }	t_philo;
 

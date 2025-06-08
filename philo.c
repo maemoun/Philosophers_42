@@ -6,7 +6,7 @@
 /*   By: maeskhai <maeskhai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 11:52:37 by maeskhai          #+#    #+#             */
-/*   Updated: 2025/06/05 17:27:08 by maeskhai         ###   ########.fr       */
+/*   Updated: 2025/06/08 15:42:20 by maeskhai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	ft_creat_philos(t_table *table)
 		table->philos[i].left_fork = &table->forks[i];
 		table->philos[i].right_fork = &table->forks[(i + 1) % table->nb_philos];
 		table->philos[i].table = table;
+		pthread_mutex_init(&table->philos[i].meal_mutex, NULL);
 		i++;
 	}
 	table->is_dead = 0;
