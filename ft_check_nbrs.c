@@ -6,7 +6,7 @@
 /*   By: maeskhai <maeskhai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 11:52:06 by maeskhai          #+#    #+#             */
-/*   Updated: 2025/06/05 20:31:00 by maeskhai         ###   ########.fr       */
+/*   Updated: 2025/06/08 12:14:51 by maeskhai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@ int	ft_check(t_table *table)
 {
 	if (table->nb_philos == 0 || table->time_to_die == 0 
 		|| table->time_to_eat == 0 || table->time_to_sleep == 0)
+		return (-1);
+	if (table->time_to_die < 60 || table->time_to_eat < 60 
+		|| table->time_to_sleep < 60 || table->nb_philos > 200)
 		return (-1);
 	return (1);
 }

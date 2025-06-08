@@ -6,7 +6,7 @@
 /*   By: maeskhai <maeskhai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 11:51:56 by maeskhai          #+#    #+#             */
-/*   Updated: 2025/06/05 17:27:04 by maeskhai         ###   ########.fr       */
+/*   Updated: 2025/06/08 15:23:09 by maeskhai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,6 @@ void	ft_print_status(t_philo *philo, char *msg);
 void	*ft_check_die(void	*arg);
 void	ft_usleep(long microseconds, t_table *table);
 void	ft_cleanup(t_table *table);
+int		is_dead_check(t_table *table);
 
 #endif
